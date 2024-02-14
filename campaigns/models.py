@@ -7,19 +7,20 @@ class Campaign(models.Model):
 	time_start = models.DateTimeField()
 	time_finish = models.DateTimeField()
 	text = models.CharField(max_length=160)
-	filter = models.CharField(max_length=100)
+	filters = models.JSONField(max_length=100, default='{}')
+	paused = models.BooleanField(default=False)
 
 	@property
 	def sms_draft_count(self):
-		return self.sms.filter(id=self.id, status=SMS_STATUS['draft']).count()
+		return self.sms.filter(status=SMS_STATUS['draft']).count()
 
 	@property
 	def sms_success_count(self):
-		return self.sms.filter(id=self.id, status=SMS_STATUS['success']).count()
+		return self.sms.filter(status=SMS_STATUS['success']).count()
 
 	@property
 	def sms_error_count(self):
-		return self.sms.filter(id=self.id, status=SMS_STATUS['error']).count()
+		return self.sms.filter(status=SMS_STATUS['error']).count()
 
 	class Meta:
 		ordering = ['id']

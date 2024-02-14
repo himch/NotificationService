@@ -20,6 +20,34 @@ class CampaignDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CampaignSerializer
 
 
+class CampaignPausedOnAPIView(generics.RetrieveAPIView):
+    """
+        Pause the campaign
+    """
+    queryset = Campaign.objects.all()
+    serializer_class = CampaignSerializer
+
+    def get_object(self):
+        obj = super().get_object()
+        obj.paused = True
+        obj.save()
+        return obj
+
+
+class CampaignPausedOffAPIView(generics.RetrieveAPIView):
+    """
+        Resume the campaign
+    """
+    queryset = Campaign.objects.all()
+    serializer_class = CampaignSerializer
+
+    def get_object(self):
+        obj = super().get_object()
+        obj.paused = False
+        obj.save()
+        return obj
+
+
 class CampaignCommonStatisticAPIView(generics.ListAPIView):
     """
         Returns a list of all campaigns in the system,

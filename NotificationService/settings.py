@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'simple_history',
     'phonenumber_field',
-    'users',
+    'users.apps.UsersConfig',
     'campaigns.apps.CampaignsConfig',
     'clients.apps.ClientsConfig',
     'sms.apps.MessagesConfig'

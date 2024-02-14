@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 
 from campaigns.views import CampaignListAPIView, CampaignDetailAPIView, CampaignStatisticAPIView, \
-    CampaignCommonStatisticAPIView
+    CampaignCommonStatisticAPIView, CampaignPausedOnAPIView, CampaignPausedOffAPIView
 from clients.views import ClientListAPIView, ClientDetailAPIView
 from sms.views import SmsListAPIView, SmsDetailAPIView
 
@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/campaigns/', CampaignListAPIView.as_view(), name='campaign-list'),
     path('api/v1/campaigns/<int:pk>/', CampaignDetailAPIView.as_view(), name='campaign-detail'),
+    path('api/v1/campaigns/<int:pk>/paused_on', CampaignPausedOnAPIView.as_view(), name='campaign-paused-on'),
+    path('api/v1/campaigns/<int:pk>/paused_off', CampaignPausedOffAPIView.as_view(), name='campaign-paused-off'),
     path('api/v1/campaigns/statistic/', CampaignCommonStatisticAPIView.as_view(), name='campaign-common-statistic'),
     path('api/v1/campaigns/statistic/<int:pk>/', CampaignStatisticAPIView.as_view(), name='campaign-detail-statistic'),
 
